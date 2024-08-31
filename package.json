@@ -1,0 +1,20 @@
+{
+  "name": "domaincheckerv2",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.1",
+    "axios": "^1.7.4",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "grammy": "^1.29.0"
+  }
+}
