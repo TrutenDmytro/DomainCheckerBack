@@ -13,6 +13,7 @@ const telegramBotAPIKey = process.env.telegramBotAPIKey;
 
 const supabase = createClient(supabaseURL, supabaseKey);
 const bot = new Bot(telegramBotAPIKey);
+const chatID = -4531331690;
 let autoInterval;
 
 const getURLID = (URL) => {
@@ -130,6 +131,12 @@ const autoCheckDomains = (data, delay = 20000) => {
           reanalyzeID,
           data[index].domainID
         );
+        if (analysisResult.stats.malicious) {
+          await bot.api.sendMessage(
+            chatID,
+            "Отлетел домен " + data[index].url 
+          );
+        }
         console.log(analysisResult);
         index++;
       } catch (err) {
@@ -187,8 +194,8 @@ app.post("/api/auto-check", async (req, res) => {
       url: `https://${obj.domain}`,
       domainID: obj.id,
     }));
-    autoCheckDomains(updatedData);
     console.log("initialized Autochecking");
+    autoCheckDomains(updatedData);
   } else {
     clearInterval(autoInterval);
     console.log("Autochecking stopped");
